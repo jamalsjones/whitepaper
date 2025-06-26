@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Identity Security Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8; 
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .kpi-card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .kpi-number {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #1E3A8A; 
+        }
+        .kpi-label {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            color: #4B5563; 
+        }
+        .header-bg {
+            background-color: #111827;
+            color: #FFFFFF;
+        }
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-active {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .spinner {
+            border-color: #DBEAFE;
+            border-top-color: #3B82F6;
+            animation: custom-spinner-anim 1s linear infinite;
+        }
+        @keyframes custom-spinner-anim {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        #modalBody h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: #1E3A8A;
+        }
+        #modalBody ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        #modalBody ul li {
+            margin-bottom: 0.5rem;
+        }
+        .stepper-btn {
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .stepper-btn.active {
+            border-bottom-color: #1E3A8A;
+            color: #1E3A8A;
+            font-weight: 700;
+        }
+        .stepper-content {
+            background-color: #FFFFFF;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-left: 5px solid #1E3A8A;
+        }
+        .benefit-card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .hidden-section {
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        .visible-section {
+            transition: all 0.5s ease-in-out;
+            max-height: 2000px; /* Large enough to not clip content */
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="header-bg p-8 md:p-12 text-center">
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-4">Fortifying Your Digital Future</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto text-blue-200">An Interactive Infographic on the Imperative of Identity Security</p>
+    </header>
+
+    <main class="p-4 md:p-8">
+
+        <section id="overview" class="max-w-6xl mx-auto mb-16 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Identity: The New Security Perimeter</h2>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto">In an era of dissolved network boundaries and multi-cloud environments, identity has become the foundational control point for enterprise security. It's no longer just a technical function; it's a strategic linchpin that unifies security, compliance, and productivity.</p>
+        </section>
+
+        <section id="threat-landscape" class="max-w-6xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Identities Under Siege: The Modern Threat Landscape</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="kpi-card">
+                    <div class="kpi-number">93%</div>
+                    <div class="kpi-label">of organizations faced an identity-related breach last year.</div>
+                </div>
+                <div class="kpi-card">
+                    <div>
+                        <div class="kpi-number">44%</div>
+                        <div class="kpi-label">of all breaches involved ransomware attacks.</div>
+                    </div>
+                    <button onclick="getThreatExplanation('Ransomware')" class="mt-4 bg-blue-100 text-blue-800 font-semibold py-2 px-4 rounded-lg hover:bg-blue-200 transition">✨ Learn More</button>
+                </div>
+                <div class="kpi-card">
+                     <div>
+                        <div class="kpi-number">2x</div>
+                        <div class="kpi-label">phishing efficiency from AI-Augmented Attacks.</div>
+                     </div>
+                     <button onclick="getThreatExplanation('AI-Augmented Attacks')" class="mt-4 bg-blue-100 text-blue-800 font-semibold py-2 px-4 rounded-lg hover:bg-blue-200 transition">✨ Learn More</button>
+                </div>
+                 <div class="kpi-card">
+                     <div>
+                        <div class="kpi-number">30%</div>
+                        <div class="kpi-label">of breaches involved a third-party partner.</div>
+                     </div>
+                     <button onclick="getThreatExplanation('Third-Party Risk')" class="mt-4 bg-blue-100 text-blue-800 font-semibold py-2 px-4 rounded-lg hover:bg-blue-200 transition">✨ Learn More</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center text-gray-900">Primary Breach Vectors</h3>
+                    <p class="text-center text-gray-600 mb-4">Credential abuse is now more common than phishing. This chart breaks down the involvement of key attack methods in recent breaches.</p>
+                    <div class="chart-container">
+                        <canvas id="breachVectorsChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center text-gray-900">The Machine Identity Explosion</h3>
+                    <p class="text-center text-gray-600 mb-4">The number of machine identities (APIs, bots) vastly outnumbers human ones, at a ratio of approximately 45 to 1. This chart illustrates the scale of this attack surface.</p>
+                     <div class="chart-container flex items-center justify-center">
+                        <canvas id="machineIdentityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="zero-trust-standalone" class="max-w-6xl mx-auto mb-16 bg-gray-800 text-white p-8 rounded-lg shadow-2xl">
+            <h2 class="text-3xl font-bold text-center mb-8">The Solution: Identity at the Core of Zero Trust</h2>
+            <p class="text-center text-lg max-w-4xl mx-auto mb-8 text-blue-200">A Zero Trust model assumes no user or device is trusted by default. Every access attempt must be verified. A strong Identity and Access Management (IAM) program is the cornerstone of this architecture.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-700 p-4 rounded-lg text-center"><div class="text-3xl mb-2">🛡️</div><h3 class="font-bold text-lg">Resilient MFA</h3><p class="text-sm text-blue-200">Resistant to phishing and prompt bombing.</p></div>
+                <div class="bg-gray-700 p-4 rounded-lg text-center"><div class="text-3xl mb-2">⏳</div><h3 class="font-bold text-lg">Just-in-Time Access</h3><p class="text-sm text-blue-200">Grants temporary, time-bound privileges.</p></div>
+                <div class="bg-gray-700 p-4 rounded-lg text-center"><div class="text-3xl mb-2">🔑</div><h3 class="font-bold text-lg">Credential Vaulting</h3><p class="text-sm text-blue-200">Secure storage and automated rotation.</p></div>
+                <div class="bg-gray-700 p-4 rounded-lg text-center"><div class="text-3xl mb-2">🤖</div><h3 class="font-bold text-lg">Machine Identity Governance</h3><p class="text-sm text-blue-200">Centralized control for non-human accounts.</p></div>
+                <div class="bg-gray-700 p-4 rounded-lg text-center"><div class="text-3xl mb-2">📈</div><h3 class="font-bold text-lg">Session Monitoring</h3><p class="text-sm text-blue-200">Real-time detection of anomalies.</p></div>
+                <div class="bg-gray-700 p-4 rounded-lg text-center"><div class="text-3xl mb-2">🚨</div><h3 class="font-bold text-lg">Identity Threat Response</h3><p class="text-sm text-blue-200">Dedicated detection and response tools.</p></div>
+            </div>
+        </section>
+
+        <section id="roadmap-container" class="max-w-6xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Achieving Identity Maturity: A Holistic Roadmap</h2>
+            <div id="stepper" class="w-full">
+                <div class="flex flex-wrap justify-center border-b border-gray-300 mb-8">
+                    <button class="stepper-btn p-4 text-gray-500 flex-grow text-center" data-step="1">1. Vision</button>
+                    <button class="stepper-btn p-4 text-gray-500 flex-grow text-center" data-step="2">2. Governance</button>
+                    <button class="stepper-btn p-4 text-gray-500 flex-grow text-center" data-step="3">3. Scope</button>
+                    <button class="stepper-btn p-4 text-gray-500 flex-grow text-center" data-step="4">4. Integration</button>
+                    <button class="stepper-btn p-4 text-gray-500 flex-grow text-center" data-step="5">5. Operations</button>
+                </div>
+                <div id="stepper-content" class="p-6 stepper-content">
+                    <div class="step-content" data-content="1">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Vision & Business Imperatives</h3>
+                        <p class="text-gray-600">The journey begins by tying the identity security vision directly to overarching business imperatives. Understanding what the business aims to achieve—whether market expansion, operational efficiency, or enhanced customer satisfaction—directly informs the identity strategy and ensures it acts as a true business enabler.</p>
+                    </div>
+                    <div class="step-content hidden" data-content="2">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Governance & Stakeholder Outreach</h3>
+                        <p class="text-gray-600">With a vision established, robust governance is crucial. This involves engaging multiple levels of stakeholders: <strong>Executive Governance</strong> for funding and alignment, <strong>Steering Committees</strong> of business leaders to integrate with operations, and close <strong>Cybersecurity Collaboration</strong> to ensure protection is paramount.</p>
+                    </div>
+                    <div class="step-content hidden" data-content="3">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Define Scope</h3>
+                        <p class="text-gray-600">With governing bodies in place, the next step is to define a manageable scope. This involves assessing where to begin based on business goals: Should the focus be on access models (invite vs. request), risk-based authentication, strengthening MFA, or implementing conditional access policies?</p>
+                    </div>
+                     <div class="step-content hidden" data-content="4">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Integration with Development</h3>
+                        <p class="text-gray-600">Identity must be woven into the fabric of innovation. This means injecting identity into the Secure Software Development Lifecycle (SSDLC), allowing teams to integrate identity components into their CI/CD pipelines. Providing developers with modular services like APIs and 'onboarding factories' accelerates secure application delivery.</p>
+                    </div>
+                     <div class="step-content hidden" data-content="5">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Robust Operations & Change Management</h3>
+                        <p class="text-gray-600">Once foundational platforms (IGA, PAM, SSO) are live, the focus shifts to operations and continuous improvement. The identity platform becomes critical for business continuity and a key data source for SOC/SIEM teams. This final phase is underpinned by <strong>change management</strong>—understanding user stories and experiences to drive adoption and ensure the platform is both effective and user-friendly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section id="business-benefits" class="my-8 hidden-section">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">The Business Case for Identity Security</h2>
+                <p class="text-lg text-gray-600 text-center max-w-4xl mx-auto mb-8">A robust identity program isn't just a cost center; it's a strategic investment that delivers tangible returns by reducing risk and enabling the business.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="kpi-card bg-blue-50 border border-blue-200">
+                        <div class="kpi-number text-green-600">309%</div>
+                        <div class="kpi-label">Return on Investment over 3 years.</div>
+                    </div>
+                    <div class="kpi-card bg-blue-50 border border-blue-200">
+                        <div class="kpi-number text-green-600">$3.1M</div>
+                        <div class="kpi-label">Annual benefit from a mature identity program.</div>
+                    </div>
+                </div>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="benefit-card">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">✔️ Reduced Risk</h3>
+                        <p class="text-sm text-gray-600">Stops breach escalation via compromised credentials and enforces least privilege access.</p>
+                    </div>
+                    <div class="benefit-card">
+                         <h3 class="font-bold text-lg text-blue-800 mb-2">⚡ Increased Efficiency</h3>
+                        <p class="text-sm text-gray-600">Automates identity lifecycle tasks and significantly improves audit readiness.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">🚀 Business Enablement</h3>
+                        <p class="text-sm text-gray-600">Provides secure access across hybrid, multi-cloud, and SaaS environments to drive innovation.</p>
+                    </div>
+                </div>
+            </section>
+    
+             <section id="tailored-controls" class="my-8 hidden-section">
+                 <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Tailored Controls for Every Identity</h2>
+                 <p class="text-lg text-gray-600 text-center max-w-4xl mx-auto mb-8">A one-size-fits-all approach to identity is insufficient. Controls must be tailored to the specific risks and requirements of different user populations.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="benefit-card">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">👤 The Workforce</h3>
+                        <p class="text-sm text-gray-600">Needs productivity-aware controls with smart privilege boundaries that secure access without introducing unnecessary friction.</p>
+                    </div>
+                    <div class="benefit-card">
+                         <h3 class="font-bold text-lg text-blue-800 mb-2">💻 IT Admins</h3>
+                        <p class="text-sm text-gray-600">Require secure, high-speed access to critical systems, demanding the strongest forms of authentication and continuous monitoring.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">👩‍💻 Developers</h3>
+                        <p class="text-sm text-gray-600">A high-risk group that needs Zero Standing Privileges (ZSP) and integrated secrets management within their CI/CD workflows.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">⚙️ Machines & Apps</h3>
+                        <p class="text-sm text-gray-600">Demand a dedicated strategy for centralized authentication, automated key rotation, and a complete audit trail of all actions.</p>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="gemini-roadmap-static" class="my-8 bg-white p-8 rounded-lg shadow-2xl hidden-section">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-2">✨ Example Personalized Security Roadmap</h2>
+                <p class="text-center text-gray-600 mb-6">This shows an example roadmap based on your selections. Select different options to see other pre-generated examples.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label for="industry" class="block text-sm font-medium text-gray-700">Industry</label>
+                        <select id="industry" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <option>Finance</option>
+                            <option>Healthcare</option>
+                            <option>Technology</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="company-size" class="block text-sm font-medium text-gray-700">Company Size</label>
+                        <select id="company-size" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                             <option>Enterprise (501+ employees)</option>
+                             <option>Medium Business (51-500 employees)</option>
+                            <option>Small Business (1-50 employees)</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button id="generateRoadmapBtn" onclick="generateStaticRoadmap()" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center">
+                            Generate Example
+                        </button>
+                    </div>
+                </div>
+                <div id="roadmapResult-static" class="mt-6 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg hidden">
+                    <div id="roadmapContent-static" class="prose max-w-none"></div>
+                </div>
+            </section>
+    
+            <section id="change-management" class="my-8 hidden-section">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Change Management: The Non-Technical Linchpin</h2>
+                <p class="text-lg text-gray-600 text-center max-w-4xl mx-auto mb-8">Technology alone is not enough. The success of any identity program hinges on user adoption. If the experience is difficult, users will find less secure workarounds, increasing risk.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                     <div class="benefit-card">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">📝 Capture User Stories</h3>
+                        <p class="text-sm text-gray-600">Understand how people *actually* interact with applications to design effective and intuitive workflows, considering all personas (employees, contractors, B2B, B2C).</p>
+                    </div>
+                    <div class="benefit-card">
+                         <h3 class="font-bold text-lg text-blue-800 mb-2">⚖️ Conduct Impact Assessments</h3>
+                        <p class="text-sm text-gray-600">Proactively identify how changes will affect different user groups and business processes to mitigate friction and ensure a smooth rollout.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">🎨 Prioritize User Experience</h3>
+                        <p class="text-sm text-gray-600">The identity experience must be consumable and palatable. A seamless user journey is what ultimately determines adoption, security, and business growth.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <footer class="bg-gray-800 text-white text-center p-8 mt-16">
+            <h2 class="text-3xl font-bold mb-4">Identity Security is a Strategic Imperative</h2>
+            <p class="max-w-3xl mx-auto text-blue-200">The convergence of Zero Trust principles, comprehensive IAM, and human-centric change management is how organizations secure their assets, empower users, and achieve sustained business value. Failure to act impacts compliance, insurance eligibility, and even M&A valuation.</p>
+        </footer>
+    </main>
+
+    <div id="explanationModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+        <div class="modal-container bg-white w-11/12 md:max-w-xl mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <p id="modalTitle" class="text-2xl font-bold"></p>
+                    <div class="modal-close cursor-pointer z-50" onclick="toggleModal(false)">
+                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg>
+                    </div>
+                </div>
+                <div id="modalBody" class="prose max-w-none">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const brilliantBluesPalette = {
+            primary: '#1E3A8A', secondary: '#3B82F6', accent: '#93C5FD', neutral: '#DBEAFE', danger: '#DC2626'
+        };
+
+        const staticThreatExplanations = {
+            'Ransomware': `<p>Malicious software that encrypts an organization's critical data, making it inaccessible. Attackers then demand a payment (ransom) to restore access, often threatening to publish or destroy the data if not paid.</p><h3>Key Mitigation Strategies</h3><ul><li>Regular, tested data backups</li><li>Employee awareness training on phishing</li><li>Consistent patch and update management</li></ul>`,
+            'AI-Augmented Attacks': `<p>The use of artificial intelligence to enhance cyberattacks, such as creating highly convincing phishing emails or accelerating the discovery of new software vulnerabilities. This allows attackers to operate with greater speed, scale, and sophistication.</p><h3>Key Mitigation Strategies</h3><ul><li>Advanced email security filters</li><li>Implement phishing-resistant MFA</li><li>Proactive threat hunting</li></ul>`,
+            'Third-Party Risk': `<p>Security breaches originating from an external partner, supplier, or vendor who has access to your systems or data. Compromised credentials from a trusted third party can provide a direct path into your network.</p><h3>Key Mitigation Strategies</h3><ul><li>Strict vendor risk management policies</li><li>Enforce least privilege for third-party access</li><li>Isolate third-party connections from critical systems</li></ul>`
+        };
+
+        const staticRoadmapData = {
+            'Finance-Enterprise (501+ employees)': `<ol><li><strong>Implement Multi-Factor Authentication (MFA) on Critical Systems.</strong> Given the financial data and high-value target status, compromised credentials are a primary risk. Start by identifying your most critical applications and plan the rollout of MFA for all users, beginning with administrators.</li><li><strong>Gain Visibility and Control Over User Access (Principle of Least Privilege).</strong> Understanding who has access to sensitive data is fundamental. Begin inventorying user accounts and their permissions across key financial applications to identify excessive privileges.</li><li><strong>Establish Foundational Identity Lifecycle Management.</strong> Formalize and automate the process for disabling or removing user accounts immediately upon termination or change in role to prevent unauthorized access by former employees.</li></ol>`,
+            'Healthcare-Medium Business (51-500 employees)': `<ol><li><strong>Deploy Phishing-Resistant MFA.</strong> Protecting patient data (ePHI) is paramount. Roll out MFA for all clinical and administrative staff accessing patient records to prevent credential theft.</li><li><strong>Secure Privileged Access.</strong> IT admins and system operators hold the keys to the kingdom. Implement a Privileged Access Management (PAM) solution to vault credentials and record all privileged sessions.</li><li><strong>Automate User Provisioning & Deprovisioning.</strong> With high staff turnover, manual processes are risky. Automate the joiner-mover-leaver process to ensure access is granted and revoked in a timely manner, maintaining compliance with HIPAA.</li></ol>`,
+            'Technology-Small Business (1-50 employees)': `<ol><li><strong>Enforce Strong MFA Everywhere.</strong> Start with strong MFA for all cloud services, especially for developer accounts with access to source code and production environments (e.g., GitHub, AWS, Google Cloud).</li><li><strong>Manage Secrets and API Keys.</strong> Developers often embed secrets in code. Implement a centralized secrets management solution to remove hardcoded credentials and securely provide them to applications and CI/CD pipelines at runtime.</li><li><strong>Implement a Simple Access Request Workflow.</strong> Even in a small team, ad-hoc access grants create risk. Establish a simple, documented process for requesting and approving access to sensitive systems.</li></ol>`,
+            'default': `<ol><li><strong>Deploy Multi-Factor Authentication (MFA).</strong> This is the single most effective step to secure user accounts. Start with administrators and then roll out to all users.</li><li><strong>Establish an Access Review Process.</strong> Regularly review who has access to what, and remove any permissions that are no longer needed. This enforces the Principle of Least Privilege.</li><li><strong>Secure Administrator Accounts.</strong> Ensure all privileged accounts are highly secure, with strong, unique passwords and MFA enabled.</li></ol>`
+        };
+
+        function wrapLabels(label, maxWidth) {
+            const words = label.split(' ');
+            let lines = []; let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                    lines.push(currentLine); currentLine = words[i];
+                } else {
+                    currentLine += ' ' + words[i];
+                }
+            }
+            lines.push(currentLine); return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) { return label.join(' '); } else { return label; }
+        };
+
+        const breachVectorsCtx = document.getElementById('breachVectorsChart').getContext('2d');
+        new Chart(breachVectorsCtx, {
+            type: 'bar',
+            data: {
+                labels: [wrapLabels('Ransomware in SMBs', 16), wrapLabels('Ransomware (Overall)', 16), wrapLabels('Third-Party Breach Involvement', 16), wrapLabels('Credential Abuse', 16)],
+                datasets: [{
+                    label: '% of Breaches', data: [88, 44, 30, 22],
+                    backgroundColor: [brilliantBluesPalette.danger, brilliantBluesPalette.primary, brilliantBluesPalette.secondary, brilliantBluesPalette.accent],
+                    borderColor: '#FFFFFF', borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+                plugins: { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } } },
+                scales: { 
+                    x: { 
+                        beginAtZero: true, 
+                        grid: { color: '#E5E7EB' }, 
+                        ticks: { callback: function(value) { return value + '%' } },
+                        title: {
+                            display: true,
+                            text: 'Involvement in Breaches (%)'
+                        }
+                    }, 
+                    y: { 
+                        grid: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Breach Vector'
+                        }
+                    } 
+                }
+            }
+        });
+
+        const machineIdentityCtx = document.getElementById('machineIdentityChart').getContext('2d');
+        new Chart(machineIdentityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Identity Ratio'],
+                datasets: [
+                    {
+                        label: 'Human Identities',
+                        data: [1],
+                        backgroundColor: brilliantBluesPalette.accent,
+                        barThickness: 50
+                    },
+                    {
+                        label: 'Machine Identities',
+                        data: [45],
+                        backgroundColor: brilliantBluesPalette.primary,
+                        barThickness: 50
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                         callbacks: {
+                           title: () => 'Identity Comparison'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Relative Count (Ratio)'
+                        }
+                    },
+                    y: {
+                        stacked: true,
+                        grid: { display: false },
+                        ticks: { display: false }
+                    }
+                }
+            }
+        });
+
+        const modal = document.getElementById('explanationModal');
+        function toggleModal(show, title = '', body = '') {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            if (show) {
+                modalTitle.textContent = title;
+                modalBody.innerHTML = body;
+                modal.classList.remove('hidden');
+                document.body.classList.add('modal-active');
+            } else {
+                modal.classList.add('hidden');
+                document.body.classList.remove('modal-active');
+            }
+        }
+        
+        function getThreatExplanation(threatName) {
+            const explanation = staticThreatExplanations[threatName] || "<p>Information not available.</p>";
+            toggleModal(true, `Explaining: ${threatName}`, explanation);
+        }
+        
+        const getLoadingSpinner = () => `<div class="flex justify-center items-center p-8"><div class="spinner h-12 w-12 rounded-full border-4"></div></div>`;
+
+        function generateStaticRoadmap() {
+            const industry = document.getElementById('industry').value;
+            const companySize = document.getElementById('company-size').value;
+            const resultDiv = document.getElementById('roadmapResult-static');
+            const contentDiv = document.getElementById('roadmapContent-static');
+            const button = document.getElementById('generateRoadmapBtn');
+            const key = `${industry}-${companySize}`;
+            
+            resultDiv.classList.remove('hidden');
+            contentDiv.innerHTML = getLoadingSpinner();
+            button.disabled = true;
+            button.innerHTML = `<div class="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></div><span class="ml-2">Generating...</span>`;
+            
+            setTimeout(() => {
+                const roadmap = staticRoadmapData[key] || staticRoadmapData['default'];
+                contentDiv.innerHTML = roadmap;
+                button.disabled = false;
+                button.innerHTML = 'Generate Example';
+            }, 1500);
+        }
+
+        document.querySelector('.modal-overlay').addEventListener('click', () => toggleModal(false));
+        
+        const stepperBtns = document.querySelectorAll('.stepper-btn');
+        const stepContents = document.querySelectorAll('.step-content');
+        const businessBenefitsSection = document.getElementById('business-benefits');
+        const tailoredControlsSection = document.getElementById('tailored-controls');
+        const geminiRoadmapSection = document.getElementById('gemini-roadmap-static');
+        const changeManagementSection = document.getElementById('change-management');
+        const allContextSections = [businessBenefitsSection, tailoredControlsSection, geminiRoadmapSection, changeManagementSection];
+
+        function showSection(section) {
+            if (!section) return;
+            section.classList.remove('hidden-section');
+            section.classList.add('visible-section');
+            section.style.marginTop = '2rem';
+        }
+
+        function hideSection(section) {
+             if (!section) return;
+            section.classList.add('hidden-section');
+            section.classList.remove('visible-section');
+            section.style.marginTop = '0';
+        }
+
+        stepperBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const step = btn.getAttribute('data-step');
+
+                stepperBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                stepContents.forEach(content => {
+                    if (content.getAttribute('data-content') === step) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+                
+                allContextSections.forEach(hideSection);
+
+                if (step === '1') {
+                    showSection(businessBenefitsSection);
+                } else if (step === '3') {
+                     showSection(tailoredControlsSection);
+                } else if (step === '4') {
+                     showSection(geminiRoadmapSection);
+                } else if (step === '5') {
+                    showSection(changeManagementSection);
+                }
+            });
+        });
+
+        // Initialize first step
+        stepperBtns[0].classList.add('active');
+        stepContents[0].classList.remove('hidden');
+        showSection(businessBenefitsSection);
+
+    </script>
+</body>
+</html>
